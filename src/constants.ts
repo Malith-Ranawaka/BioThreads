@@ -1,0 +1,162 @@
+import { Product, Category } from './types';
+
+export const CATEGORIES: Category[] = [
+  { id: 'all', name: 'All', icon: 'LayoutGrid' },
+  { id: 't-shirts', name: 'T-shirts', icon: 'Shirt' },
+  { id: 'pants', name: 'Pants', icon: 'Columns2' },
+  { id: 'jackets', name: 'Jackets', icon: 'Wind' },
+  { id: 'bioloop', name: 'The BioLoop Collection', icon: 'RefreshCw' },
+];
+
+export const MOCK_PRODUCTS: Product[] = [
+  {
+    id: 'bio-1',
+    title: 'Aura Organic Cotton Tee',
+    price: 80.00,
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800&auto=format&fit=crop',
+    secondaryImage: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=800&auto=format&fit=crop',
+    materialPassport: 'Origin: GOTS Certified Organic Cotton (India). End-of-Life: 100% Biodegradable (Compostable in 180 days).',
+    ecoSaving: 'Water-based Inks',
+    category: 't-shirts',
+    isBioLoop: true,
+    stockLevel: 24,
+    materialComposition: '100% GOTS Organic Cotton',
+    biodegradabilityScore: 100,
+    biodegradabilityLabel: 'Certified Compostable',
+    returnValue: 15.00,
+    description: "Modern style meets radical transparency. Our Aura Print Tee combines a contemporary aesthetic with strictly ethical production. We use only low-toxicity, water-based dyes that are gentle on your skin and safe for the ecosystems they return to. A premium staple that makes a statement without leaving a mark."
+  },
+  {
+    id: 'bio-2',
+    title: 'Zen Bamboo Long Sleeve',
+    price: 85.00,
+    image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=800&auto=format&fit=crop',
+    secondaryImage: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop',
+    materialPassport: 'Origin: Sustainably Sourced Bamboo (Sichuan). End-of-Life: 100% Biodegradable (Zero harmful residue).',
+    ecoSaving: '70% Less CO2',
+    category: 't-shirts',
+    isBioLoop: true,
+    stockLevel: 18,
+    materialComposition: '95% Bamboo, 5% Elastane',
+    biodegradabilityScore: 92,
+    biodegradabilityLabel: 'High Bio-Score',
+    returnValue: 15.00,
+    description: "Experience the breathable, natural embrace of our signature Zen Bamboo Jersey. Engineered for everyday wear, this long sleeve offers superior thermal regulation and a silken touch. At the end of its journey, it breaks down naturally into the earth, leaving behind absolutely no harmful synthetic residue."
+  },
+  {
+    id: 'bio-3',
+    title: 'Terra Hemp Utility Jacket',
+    price: 145.00,
+    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop',
+    secondaryImage: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800&auto=format&fit=crop',
+    materialPassport: 'Origin: Rain-fed Organic Hemp (Turkey). End-of-Life: 100% Biodegradable (Soil-enriching).',
+    ecoSaving: 'Zero Pesticides',
+    category: 'jackets',
+    isBioLoop: true,
+    stockLevel: 12,
+    materialComposition: '100% Organic Hemp',
+    biodegradabilityScore: 98,
+    biodegradabilityLabel: 'Regenerative Fiber',
+    returnValue: 25.00,
+    description: "Built to last, designed to return. We've engineered our Terra Hemp Utility Jacket with high-density long-staple fibers to ensure maximum durability. This isn't just a jacket; it's a resilient companion that stands the test of time before safely enriching the soil."
+  },
+  {
+    id: '1',
+    title: 'Nomad Linen Summer Shirt',
+    price: 95.00,
+    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
+    secondaryImage: 'https://images.unsplash.com/photo-1626497748470-284d81f9f350?q=80&w=800&auto=format&fit=crop',
+    materialPassport: '100% European Flax Linen',
+    ecoSaving: 'Low Water Usage',
+    category: 't-shirts',
+    stockLevel: 45,
+    materialComposition: '100% European Flax',
+    biodegradabilityScore: 100,
+    biodegradabilityLabel: 'Pure Flax',
+    returnValue: 10.00,
+    description: "Effortless elegance for the conscious traveler. Our Nomad Linen Shirt is crafted from premium European flax, requiring minimal irrigation and no synthetic fertilizers. It's naturally antimicrobial, breathable, and designed to age beautifully with every wear."
+  },
+  {
+    id: '2',
+    title: 'Core Bamboo Essential Tee',
+    price: 45.00,
+    image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop',
+    secondaryImage: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=800&auto=format&fit=crop',
+    materialPassport: '95% Bamboo, 5% Elastane',
+    ecoSaving: '70% Less CO2',
+    category: 't-shirts',
+    stockLevel: 120,
+    materialComposition: '95% Bamboo, 5% Elastane',
+    biodegradabilityScore: 92,
+    biodegradabilityLabel: 'Ultra Soft',
+    returnValue: 10.00,
+    description: "A second skin that breathes with you, softer than silk and kinder to the earth. We chose Bamboo for its extraordinary thermal regulation and natural moisture-wicking properties. It provides a silken drape that remains durable through countless washes."
+  },
+  {
+    id: '3',
+    title: 'Urban Organic Chinos',
+    price: 110.00,
+    image: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=800&auto=format&fit=crop',
+    secondaryImage: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop',
+    materialPassport: 'Recycled Cotton Blend',
+    ecoSaving: 'Saves 1500L Water',
+    category: 'pants',
+    isBioLoop: true,
+    stockLevel: 32,
+    materialComposition: '80% Recycled Cotton, 20% Hemp',
+    biodegradabilityScore: 85,
+    biodegradabilityLabel: 'Circular Denim',
+    returnValue: 20.00,
+    description: "The perfect balance of structure and stretch, engineered for effortless movement from dawn to dusk. Our Urban Chinos use a blend of recycled cotton and hemp to minimize environmental footprint while maximizing durability."
+  },
+  {
+    id: '4',
+    title: 'Cloud Organic Hoodie',
+    price: 120.00,
+    image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop',
+    secondaryImage: 'https://images.unsplash.com/photo-1513273195090-c742527369a0?q=80&w=800&auto=format&fit=crop',
+    materialPassport: '100% GOTS Cotton',
+    ecoSaving: 'No Toxic Pesticides',
+    category: 'jackets',
+    stockLevel: 15,
+    materialComposition: '100% GOTS Organic Cotton',
+    biodegradabilityScore: 100,
+    biodegradabilityLabel: 'Pure Organic',
+    returnValue: 20.00,
+    description: "A timeless knit that honors the past and protects the future. Our Cloud Hoodie is made from heavy-weight GOTS certified cotton, providing unparalleled warmth and comfort without the environmental cost of synthetic blends."
+  },
+  {
+    id: '5',
+    title: 'BioLoop Refurbished Parka',
+    price: 185.00,
+    image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=800&auto=format&fit=crop',
+    secondaryImage: 'https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=800&auto=format&fit=crop',
+    materialPassport: 'Upcycled Bio-Polymers',
+    ecoSaving: 'Zero Waste',
+    category: 'bioloop',
+    isBioLoop: true,
+    stockLevel: 8,
+    materialComposition: '100% Upcycled Bio-Polymers',
+    biodegradabilityScore: 75,
+    biodegradabilityLabel: 'Upcycled Tech',
+    returnValue: 40.00,
+    description: "Rugged utility meets sustainable luxury. This parka is part of our circular program, crafted from upcycled bio-polymers that would otherwise go to waste. It's fully weather-resistant and designed for extreme longevity."
+  }
+];
+
+export const HERO_SLIDES = [
+  {
+    id: 1,
+    title: 'Hemp Jackets',
+    subtitle: 'Durable. Sustainable. Timeless.',
+    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=1920',
+    color: 'bg-stone-800'
+  },
+  {
+    id: 2,
+    title: 'Bamboo Basics',
+    subtitle: 'Softer than silk, better for the planet.',
+    image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=1920',
+    color: 'bg-emerald-900'
+  }
+];
