@@ -45,6 +45,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
               transition={{ duration: 0.6, ease: "easeInOut" }}
               className="absolute inset-0 w-full h-full object-cover"
               referrerPolicy="no-referrer"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                if (isHovered && product.secondaryImage && target.src === product.secondaryImage) {
+                  target.src = product.image;
+                }
+              }}
             />
           </AnimatePresence>
         </motion.div>
@@ -103,7 +109,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
           <button 
             onClick={(e) => {
               e.stopPropagation();
-              addToCart(product);
+              const defaultSize = product.sizes?.[0];
+              const defaultColor = product.colors?.[0]?.name;
+              addToCart(product, defaultSize, defaultColor);
             }}
             className="w-full bg-stone-900 text-white py-3 rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 hover:bg-emerald-600 transition-colors shadow-2xl"
           >

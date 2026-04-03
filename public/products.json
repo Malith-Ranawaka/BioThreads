@@ -14,7 +14,13 @@
     "biodegradabilityScore": 100,
     "biodegradabilityLabel": "Certified Compostable",
     "returnValue": 15.00,
-    "description": "Modern style meets radical transparency. Our Aura Print Tee combines a contemporary aesthetic with strictly ethical production. We use only low-toxicity, water-based dyes that are gentle on your skin and safe for the ecosystems they return to. A premium staple that makes a statement without leaving a mark."
+    "description": "Modern style meets radical transparency. Our Aura Print Tee combines a contemporary aesthetic with strictly ethical production. We use only low-toxicity, water-based dyes that are gentle on your skin and safe for the ecosystems they return to. A premium staple that makes a statement without leaving a mark.",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": [
+      { "name": "Natural", "hex": "#f5f5f4", "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800&auto=format&fit=crop" },
+      { "name": "Sage", "hex": "#84a59d", "image": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" },
+      { "name": "Stone", "hex": "#78716c", "image": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=800&auto=format&fit=crop" }
+    ]
   },
   {
     "id": "bio-2",
@@ -31,7 +37,12 @@
     "biodegradabilityScore": 92,
     "biodegradabilityLabel": "High Bio-Score",
     "returnValue": 15.00,
-    "description": "Experience the breathable, natural embrace of our signature Zen Bamboo Jersey. Engineered for everyday wear, this long sleeve offers superior thermal regulation and a silken touch. At the end of its journey, it breaks down naturally into the earth, leaving behind absolutely no harmful synthetic residue."
+    "description": "Experience the breathable, natural embrace of our signature Zen Bamboo Jersey. Engineered for everyday wear, this long sleeve offers superior thermal regulation and a silken touch. At the end of its journey, it breaks down naturally into the earth, leaving behind absolutely no harmful synthetic residue.",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": [
+      { "name": "Off-White", "hex": "#fafaf9", "image": "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=800&auto=format&fit=crop" },
+      { "name": "Charcoal", "hex": "#44403c", "image": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop" }
+    ]
   },
   {
     "id": "bio-3",
@@ -48,14 +59,19 @@
     "biodegradabilityScore": 98,
     "biodegradabilityLabel": "Regenerative Fiber",
     "returnValue": 25.00,
-    "description": "Built to last, designed to return. We've engineered our Terra Hemp Utility Jacket with high-density long-staple fibers to ensure maximum durability. This isn't just a jacket; it's a resilient companion that stands the test of time before safely enriching the soil."
+    "description": "Built to last, designed to return. We've engineered our Terra Hemp Utility Jacket with high-density long-staple fibers to ensure maximum durability. This isn't just a jacket; it's a resilient companion that stands the test of time before safely enriching the soil.",
+    "sizes": ["M", "L", "XL"],
+    "colors": [
+      { "name": "Olive", "hex": "#4b5320", "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop" },
+      { "name": "Sand", "hex": "#c2b280", "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800&auto=format&fit=crop" }
+    ]
   },
   {
     "id": "1",
     "title": "Nomad Linen Summer Shirt",
     "price": 95.00,
     "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop",
-    "secondaryImage": "https://images.unsplash.com/photo-1626497748470-284d81f9f350?q=80&w=800&auto=format&fit=crop",
+    "secondaryImage": "https://images.unsplash.com/photo-1598033129183-c4f50c7176c8?q=80&w=800&auto=format&fit=crop",
     "materialPassport": "100% European Flax Linen",
     "ecoSaving": "Low Water Usage",
     "category": "t-shirts",
@@ -64,7 +80,12 @@
     "biodegradabilityScore": 100,
     "biodegradabilityLabel": "Pure Flax",
     "returnValue": 10.00,
-    "description": "Effortless elegance for the conscious traveler. Our Nomad Linen Shirt is crafted from premium European flax, requiring minimal irrigation and no synthetic fertilizers. It's naturally antimicrobial, breathable, and designed to age beautifully with every wear."
+    "description": "Effortless elegance for the conscious traveler. Our Nomad Linen Shirt is crafted from premium European flax, requiring minimal irrigation and no synthetic fertilizers. It's naturally antimicrobial, breathable, and designed to age beautifully with every wear.",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": [
+      { "name": "Sky", "hex": "#bae6fd", "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop" },
+      { "name": "White", "hex": "#ffffff", "image": "https://images.unsplash.com/photo-1626497748470-284d81f9f350?q=80&w=800&auto=format&fit=crop" }
+    ]
   },
   {
     "id": "2",
@@ -80,7 +101,12 @@
     "biodegradabilityScore": 92,
     "biodegradabilityLabel": "Ultra Soft",
     "returnValue": 10.00,
-    "description": "A second skin that breathes with you, softer than silk and kinder to the earth. We chose Bamboo for its extraordinary thermal regulation and natural moisture-wicking properties. It provides a silken drape that remains durable through countless washes."
+    "description": "A second skin that breathes with you, softer than silk and kinder to the earth. We chose Bamboo for its extraordinary thermal regulation and natural moisture-wicking properties. It provides a silken drape that remains durable through countless washes.",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": [
+      { "name": "Black", "hex": "#000000", "image": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop" },
+      { "name": "Grey", "hex": "#71717a", "image": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=800&auto=format&fit=crop" }
+    ]
   },
   {
     "id": "3",
@@ -97,7 +123,12 @@
     "biodegradabilityScore": 85,
     "biodegradabilityLabel": "Circular Denim",
     "returnValue": 20.00,
-    "description": "The perfect balance of structure and stretch, engineered for effortless movement from dawn to dusk. Our Urban Chinos use a blend of recycled cotton and hemp to minimize environmental footprint while maximizing durability."
+    "description": "The perfect balance of structure and stretch, engineered for effortless movement from dawn to dusk. Our Urban Chinos use a blend of recycled cotton and hemp to minimize environmental footprint while maximizing durability.",
+    "sizes": ["30", "32", "34", "36"],
+    "colors": [
+      { "name": "Khaki", "hex": "#c3b091", "image": "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=800&auto=format&fit=crop" },
+      { "name": "Navy", "hex": "#000080", "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop" }
+    ]
   },
   {
     "id": "4",
@@ -113,7 +144,12 @@
     "biodegradabilityScore": 100,
     "biodegradabilityLabel": "Pure Organic",
     "returnValue": 20.00,
-    "description": "A timeless knit that honors the past and protects the future. Our Cloud Hoodie is made from heavy-weight GOTS certified cotton, providing unparalleled warmth and comfort without the environmental cost of synthetic blends."
+    "description": "A timeless knit that honors the past and protects the future. Our Cloud Hoodie is made from heavy-weight GOTS certified cotton, providing unparalleled warmth and comfort without the environmental cost of synthetic blends.",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": [
+      { "name": "Cloud", "hex": "#f8fafc", "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop" },
+      { "name": "Storm", "hex": "#475569", "image": "https://images.unsplash.com/photo-1513273195090-c742527369a0?q=80&w=800&auto=format&fit=crop" }
+    ]
   },
   {
     "id": "5",
@@ -130,6 +166,11 @@
     "biodegradabilityScore": 75,
     "biodegradabilityLabel": "Upcycled Tech",
     "returnValue": 40.00,
-    "description": "Rugged utility meets sustainable luxury. This parka is part of our circular program, crafted from upcycled bio-polymers that would otherwise go to waste. It's fully weather-resistant and designed for extreme longevity."
+    "description": "Rugged utility meets sustainable luxury. This parka is part of our circular program, crafted from upcycled bio-polymers that would otherwise go to waste. It's fully weather-resistant and designed for extreme longevity.",
+    "sizes": ["M", "L"],
+    "colors": [
+      { "name": "Forest", "hex": "#228b22", "image": "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=800&auto=format&fit=crop" },
+      { "name": "Midnight", "hex": "#191970", "image": "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=800&auto=format&fit=crop" }
+    ]
   }
 ]

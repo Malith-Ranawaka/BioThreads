@@ -75,8 +75,8 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   </button>
                 </div>
               ) : (
-                cart.map((item) => (
-                  <div key={item.id} className="flex gap-4 group">
+                cart.map((item, index) => (
+                  <div key={`${item.id}-${index}`} className="flex gap-4 group">
                     <div className="w-20 h-24 bg-stone-50 rounded-2xl overflow-hidden flex-shrink-0">
                       <img
                         src={item.image}
@@ -94,27 +94,39 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                           ${(item.price * item.quantity).toFixed(2)}
                         </span>
                       </div>
+                      <div className="flex gap-2 mb-2">
+                        {item.selectedSize && (
+                          <span className="text-[10px] bg-stone-100 px-2 py-0.5 rounded font-bold text-stone-600">
+                            Size: {item.selectedSize}
+                          </span>
+                        )}
+                        {item.selectedColor && (
+                          <span className="text-[10px] bg-stone-100 px-2 py-0.5 rounded font-bold text-stone-600">
+                            Color: {item.selectedColor}
+                          </span>
+                        )}
+                      </div>
                       <p className="text-[10px] text-stone-400 font-bold uppercase tracking-wider mb-3">
                         {item.materialPassport}
                       </p>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3 bg-stone-50 rounded-full px-3 py-1 border border-stone-100">
                           <button
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            onClick={() => updateQuantity(index.toString(), item.quantity - 1)}
                             className="text-stone-400 hover:text-stone-900"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
                           <span className="text-xs font-bold w-4 text-center">{item.quantity}</span>
                           <button
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            onClick={() => updateQuantity(index.toString(), item.quantity + 1)}
                             className="text-stone-400 hover:text-stone-900"
                           >
                             <Plus className="w-3 h-3" />
                           </button>
                         </div>
                         <button
-                          onClick={() => removeFromCart(item.id)}
+                          onClick={() => removeFromCart(index.toString())}
                           className="text-stone-300 hover:text-red-500 transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />

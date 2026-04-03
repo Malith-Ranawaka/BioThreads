@@ -1,7 +1,10 @@
 import { motion } from 'motion/react';
 import { Droplets, Wind, Leaf, RefreshCw } from 'lucide-react';
+import { useState } from 'react';
+import ImpactReportModal from './ImpactReportModal';
 
 export default function ImpactDashboard() {
+  const [isReportOpen, setIsReportOpen] = useState(false);
   const stats = [
     { label: 'Water Saved', value: '12,450L', icon: Droplets, color: 'text-blue-500', bg: 'bg-blue-50' },
     { label: 'CO2 Offset', value: '45.2kg', icon: Wind, color: 'text-stone-500', bg: 'bg-stone-100' },
@@ -17,7 +20,10 @@ export default function ImpactDashboard() {
             <h2 className="text-3xl font-black text-stone-900 tracking-tight mb-2">Your Environmental Impact</h2>
             <p className="text-stone-500 font-medium">Real-time tracking of your sustainable choices with BioThreads.</p>
           </div>
-          <button className="px-6 py-3 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20">
+          <button 
+            onClick={() => setIsReportOpen(true)}
+            className="px-6 py-3 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20"
+          >
             View Full Report
           </button>
         </div>
@@ -68,6 +74,7 @@ export default function ImpactDashboard() {
           </p>
         </div>
       </div>
+      <ImpactReportModal isOpen={isReportOpen} onClose={() => setIsReportOpen(false)} />
     </div>
   );
 }

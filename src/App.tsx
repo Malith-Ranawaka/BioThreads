@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Header from './components/Header';
 import Logo from './components/Logo';
 import Hero from './components/Hero';
@@ -11,11 +11,27 @@ import { WishlistProvider } from './context/WishlistContext';
 import { motion } from 'motion/react';
 
 import ImpactDashboard from './components/ImpactDashboard';
+import StaticPageModal, { StaticPageType } from './components/StaticPageModal';
+import UserProfileModal from './components/UserProfileModal';
 
 export default function App() {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isReturnModalOpen, setIsReturnModalOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [staticPageType, setStaticPageType] = useState<StaticPageType | null>(null);
+  const productsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (searchQuery && productsRef.current) {
+      productsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [searchQuery]);
+
+  const openStaticPage = (type: StaticPageType) => {
+    setStaticPageType(type);
+  };
 
   return (
     <CartProvider>
@@ -24,12 +40,21 @@ export default function App() {
           <Header 
             onOpenCart={() => setIsCartOpen(true)} 
             onOpenReturn={() => setIsReturnModalOpen(true)}
+            onOpenProfile={() => setIsProfileOpen(true)}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
           />
           <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
           <BioLoopReturnModal isOpen={isReturnModalOpen} onClose={() => setIsReturnModalOpen(false)} />
+          <UserProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
+          <StaticPageModal 
+            isOpen={staticPageType !== null} 
+            onClose={() => setStaticPageType(null)} 
+            type={staticPageType} 
+          />
           
           <main className="flex-grow">
-          <Hero />
+          <Hero onShopNow={() => productsRef.current?.scrollIntoView({ behavior: 'smooth' })} />
           
           <CategoryBar 
             activeCategory={activeCategory} 
@@ -37,7 +62,10 @@ export default function App() {
           />
 
           {/* Section Header */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-4 flex items-end justify-between">
+          <div 
+            ref={productsRef}
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-4 flex items-end justify-between scroll-mt-24"
+          >
             <div>
               <motion.h2 
                 key={activeCategory}
@@ -45,10 +73,10 @@ export default function App() {
                 animate={{ opacity: 1, x: 0 }}
                 className="text-3xl font-black tracking-tight text-stone-900 capitalize"
               >
-                {activeCategory === 'all' ? 'Trending Sustainable Picks' : activeCategory.replace('-', ' ')}
+                {searchQuery ? `Search Results for "${searchQuery}"` : (activeCategory === 'all' ? 'Trending Sustainable Picks' : activeCategory.replace('-', ' '))}
               </motion.h2>
               <p className="text-stone-500 text-sm font-medium mt-1">
-                Curated for style and environmental impact.
+                {searchQuery ? `Found results matching your search.` : `Curated for style and environmental impact.`}
               </p>
             </div>
             
@@ -62,7 +90,7 @@ export default function App() {
             </div>
           </div>
 
-          <ProductGrid category={activeCategory} />
+          <ProductGrid category={activeCategory} searchQuery={searchQuery} />
           
           <ImpactDashboard />
         </main>
@@ -82,19 +110,19 @@ export default function App() {
               <div>
                 <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">Marketplace</h4>
                 <ul className="space-y-4 text-sm">
-                  <li><a href="#" className="hover:text-emerald-400 transition-colors">New Arrivals</a></li>
-                  <li><a href="#" className="hover:text-emerald-400 transition-colors">Material Passport</a></li>
-                  <li><a href="#" className="hover:text-emerald-400 transition-colors">BioLoop Collection</a></li>
-                  <li><a href="#" className="hover:text-emerald-400 transition-colors">Eco-Saving Guide</a></li>
+                  <li><button onClick={() => { setActiveCategory('all'); setSearchQuery(''); productsRef.current?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-emerald-400 transition-colors text-left w-full">New Arrivals</button></li>
+                  <li><button onClick={() => openStaticPage('material-passport')} className="hover:text-emerald-400 transition-colors text-left w-full">Material Passport</button></li>
+                  <li><button onClick={() => { setActiveCategory('bioloop'); setSearchQuery(''); productsRef.current?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-emerald-400 transition-colors text-left w-full">BioLoop Collection</button></li>
+                  <li><button onClick={() => openStaticPage('eco-guide')} className="hover:text-emerald-400 transition-colors text-left w-full">Eco-Saving Guide</button></li>
                 </ul>
               </div>
               <div>
                 <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">Support</h4>
                 <ul className="space-y-4 text-sm">
-                  <li><a href="#" className="hover:text-emerald-400 transition-colors">Shipping & Returns</a></li>
-                  <li><a href="#" className="hover:text-emerald-400 transition-colors">Contact Us</a></li>
-                  <li><a href="#" className="hover:text-emerald-400 transition-colors">FAQ</a></li>
-                  <li><a href="#" className="hover:text-emerald-400 transition-colors">Privacy Policy</a></li>
+                  <li><button onClick={() => openStaticPage('shipping')} className="hover:text-emerald-400 transition-colors text-left w-full">Shipping & Returns</button></li>
+                  <li><button onClick={() => openStaticPage('contact')} className="hover:text-emerald-400 transition-colors text-left w-full">Contact Us</button></li>
+                  <li><button onClick={() => openStaticPage('faq')} className="hover:text-emerald-400 transition-colors text-left w-full">FAQ</button></li>
+                  <li><button onClick={() => openStaticPage('privacy')} className="hover:text-emerald-400 transition-colors text-left w-full">Privacy Policy</button></li>
                 </ul>
               </div>
             </div>

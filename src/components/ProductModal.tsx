@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ShieldCheck, Droplets, RefreshCw, ShoppingBag, Heart } from 'lucide-react';
+import { X, ShieldCheck, Droplets, RefreshCw, ShoppingBag, Heart, Ruler } from 'lucide-react';
 import { Product } from '../types';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -13,10 +13,73 @@ interface ProductModalProps {
 export default function ProductModal({ product, onClose }: ProductModalProps) {
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [selectedColor, setSelectedColor] = useState<string>('');
+  const [showSizeChart, setShowSizeChart] = useState(false);
 
   if (!product) return null;
 
   const isWishlisted = isInWishlist(product.id);
+
+  // Set default selections if available
+  if (!selectedSize && product.sizes && product.sizes.length > 0) {
+    setSelectedSize(product.sizes[0]);
+  }
+  if (!selectedColor && product.colors && product.colors.length > 0) {
+    setSelectedColor(product.colors[0].name);
+  }
+
+  // Determine current image based on selected color
+  const currentImage = product.colors?.find(c => c.name === selectedColor)?.image || product.image;
+
+  const SizeChart = () => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
+      className="absolute inset-0 z-50 bg-white p-8 overflow-y-auto"
+    >
+      <div className="flex justify-between items-center mb-8">
+        <h3 className="text-xl font-black text-stone-900">Size Guide</h3>
+        <button onClick={() => setShowSizeChart(false)} className="p-2 hover:bg-stone-100 rounded-full">
+          <X className="w-6 h-6" />
+        </button>
+      </div>
+      <div className="space-y-6">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-stone-100">
+              <th className="py-4 text-left font-black text-stone-400 uppercase tracking-widest text-[10px]">Size</th>
+              <th className="py-4 text-left font-black text-stone-400 uppercase tracking-widest text-[10px]">Chest (in)</th>
+              <th className="py-4 text-left font-black text-stone-400 uppercase tracking-widest text-[10px]">Waist (in)</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-stone-50">
+            {[
+              { s: 'S', c: '34-36', w: '28-30' },
+              { s: 'M', c: '38-40', w: '32-34' },
+              { s: 'L', c: '42-44', w: '36-38' },
+              { s: 'XL', c: '46-48', w: '40-42' },
+            ].map((row) => (
+              <tr key={row.s}>
+                <td className="py-4 font-bold text-stone-900">{row.s}</td>
+                <td className="py-4 text-stone-600">{row.c}</td>
+                <td className="py-4 text-stone-600">{row.w}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="bg-stone-50 p-6 rounded-3xl border border-stone-100">
+          <p className="text-xs text-stone-500 leading-relaxed">
+            <span className="font-bold text-stone-900 block mb-2">How to measure:</span>
+            Chest: Measure around the fullest part of your chest, keeping the tape horizontal.
+            <br />
+            Waist: Measure around the narrowest part (typically where your body bends side to side), keeping the tape horizontal.
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
 
   return (
     <AnimatePresence>
@@ -37,6 +100,10 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           className="relative w-full max-w-4xl bg-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
         >
+          <AnimatePresence>
+            {showSizeChart && <SizeChart />}
+          </AnimatePresence>
+
           {/* Close Button */}
           <button
             onClick={onClose}
@@ -47,12 +114,19 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
 
           {/* Image Section */}
           <div className="relative w-full md:w-1/2 h-[300px] md:h-auto bg-stone-50">
-            <img
-              src={product.image}
-              alt={product.title}
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentImage}
+                src={currentImage}
+                alt={product.title}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
+            </AnimatePresence>
             
             {/* Wishlist Button */}
             <button
@@ -93,7 +167,63 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 </p>
               </div>
 
-              {/* Description (The Hook & Details) */}
+              {/* Variations */}
+              <div className="space-y-6">
+                {/* Color Selection */}
+                {product.colors && product.colors.length > 0 && (
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Color: {selectedColor}</span>
+                    </div>
+                    <div className="flex gap-3">
+                      {product.colors.map((color) => (
+                        <button
+                          key={color.name}
+                          onClick={() => setSelectedColor(color.name)}
+                          className={`w-8 h-8 rounded-full border-2 transition-all ${
+                            selectedColor === color.name ? 'border-emerald-600 scale-110' : 'border-transparent'
+                          }`}
+                          style={{ backgroundColor: color.hex }}
+                          title={color.name}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Size Selection */}
+                {product.sizes && product.sizes.length > 0 && (
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Size</span>
+                      <button 
+                        onClick={() => setShowSizeChart(true)}
+                        className="flex items-center gap-1 text-[10px] font-black text-emerald-600 uppercase tracking-widest hover:text-emerald-700"
+                      >
+                        <Ruler className="w-3 h-3" />
+                        Size Guide
+                      </button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {product.sizes.map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => setSelectedSize(size)}
+                          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
+                            selectedSize === size 
+                              ? 'bg-stone-900 text-white border-stone-900' 
+                              : 'bg-white text-stone-600 border-stone-200 hover:border-stone-900'
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Description */}
               <div className="space-y-4">
                 <p className="text-lg font-bold text-stone-800 leading-relaxed italic border-l-4 border-emerald-500 pl-4">
                   {product.description.split('. ')[0]}.
@@ -170,7 +300,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
               <div className="pt-4 flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => {
-                    addToCart(product);
+                    addToCart(product, selectedSize, selectedColor);
                     onClose();
                   }}
                   className="flex-1 bg-stone-900 text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-emerald-600 transition-all flex items-center justify-center gap-3 shadow-xl shadow-stone-900/10"

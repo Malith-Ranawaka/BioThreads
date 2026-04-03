@@ -3,13 +3,15 @@ import { Product } from '../types';
 
 interface CartItem extends Product {
   quantity: number;
+  selectedSize?: string;
+  selectedColor?: string;
 }
 
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (product: Product) => void;
-  removeFromCart: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  addToCart: (product: Product, size?: string, color?: string) => void;
+  removeFromCart: (itemId: string) => void;
+  updateQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
   totalItems: number;
   subtotal: number;
@@ -26,29 +28,42 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [useBioLoopCredit, setUseBioLoopCredit] = useState(false);
   const bioLoopCreditAmount = 20;
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, size?: string, color?: string) => {
     setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
+      const existingIndex = prev.findIndex(
+        (item) => item.id === product.id && item.selectedSize === size && item.selectedColor === color
+      );
+      if (existingIndex !== -1) {
+        const newCart = [...prev];
+        newCart[existingIndex] = { ...newCart[existingIndex], quantity: newCart[existingIndex].quantity + 1 };
+        return newCart;
       }
-      return [...prev, { ...product, quantity: 1 }];
+      const newItem: CartItem = { 
+        ...product, 
+        quantity: 1, 
+        selectedSize: size, 
+        selectedColor: color,
+        // We need a unique ID for the cart item if we want to remove/update easily
+        // But for now let's use the index or a composite key
+      };
+      return [...prev, newItem];
     });
   };
 
-  const removeFromCart = (productId: string) => {
-    setCart((prev) => prev.filter((item) => item.id !== productId));
+  const removeFromCart = (itemId: string) => {
+    // We'll use a composite key or just the index for simplicity in this demo
+    // But let's stick to the current logic and just filter by ID + variations if needed
+    // Actually, let's change the logic to use a unique cartItemId
+    setCart((prev) => prev.filter((_, index) => index.toString() !== itemId));
   };
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = (itemId: string, quantity: number) => {
     if (quantity <= 0) {
-      removeFromCart(productId);
+      removeFromCart(itemId);
       return;
     }
     setCart((prev) =>
-      prev.map((item) => (item.id === productId ? { ...item, quantity } : item))
+      prev.map((item, index) => (index.toString() === itemId ? { ...item, quantity } : item))
     );
   };
 

@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { HERO_SLIDES } from '../constants';
 
-export default function Hero() {
+interface HeroProps {
+  onShopNow?: () => void;
+}
+
+export default function Hero({ onShopNow }: HeroProps) {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -36,14 +40,6 @@ export default function Hero() {
           />
           <div className="absolute inset-0 z-20 flex items-center justify-center text-center px-4">
             <div className="max-w-3xl">
-              <motion.span
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="inline-block px-3 py-1 bg-emerald-600 text-white text-xs font-bold uppercase tracking-widest rounded-full mb-4"
-              >
-                New Arrival
-              </motion.span>
               <motion.h1
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -64,6 +60,7 @@ export default function Hero() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5 }}
+                onClick={onShopNow}
                 className="px-8 py-4 bg-white text-stone-900 font-bold rounded-full hover:bg-emerald-50 transition-colors shadow-lg"
               >
                 Shop Now

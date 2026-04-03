@@ -6,9 +6,10 @@ import { Loader2 } from 'lucide-react';
 
 interface ProductGridProps {
   category: string;
+  searchQuery?: string;
 }
 
-export default function ProductGrid({ category }: ProductGridProps) {
+export default function ProductGrid({ category, searchQuery = '' }: ProductGridProps) {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -28,18 +29,43 @@ export default function ProductGrid({ category }: ProductGridProps) {
     fetchProducts();
   }, []);
 
-  // Filter products based on category
+  // Filter products based on category and search query
   const filteredProducts = useMemo(() => {
-    return category === 'all' 
-      ? allProducts 
-      : allProducts.filter(p => p.category === category);
-  }, [allProducts, category]);
+    let filtered = allProducts;
+    
+    if (category !== 'all') {
+      filtered = filtered.filter(p => p.category === category);
+    }
+    
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.title.toLowerCase().includes(query) || 
+        p.description.toLowerCase().includes(query) ||
+        p.materialComposition.toLowerCase().includes(query)
+      );
+    }
+    
+    return filtered;
+  }, [allProducts, category, searchQuery]);
 
   if (loading) {
     return (
       <div className="py-24 flex flex-col items-center justify-center gap-4">
         <Loader2 className="w-10 h-10 text-emerald-600 animate-spin" />
         <p className="text-sm font-bold text-stone-400 uppercase tracking-widest">Loading sustainable items...</p>
+      </div>
+    );
+  }
+
+  if (filteredProducts.length === 0) {
+    return (
+      <div className="py-24 flex flex-col items-center justify-center gap-4 text-center">
+        <div className="bg-stone-50 p-6 rounded-full">
+          <Loader2 className="w-10 h-10 text-stone-200" />
+        </div>
+        <h3 className="text-xl font-black text-stone-900">No products found</h3>
+        <p className="text-stone-500 font-medium max-w-xs">We couldn't find any items matching your search. Try adjusting your filters or search terms.</p>
       </div>
     );
   }

@@ -15,6 +15,8 @@ export interface Product {
   badges?: string[];
   returnValue: number;
   description: string;
+  sizes?: string[];
+  colors?: { name: string; hex: string; image?: string }[];
 }
 
 export interface Category {

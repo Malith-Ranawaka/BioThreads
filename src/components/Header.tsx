@@ -5,9 +5,12 @@ import Logo from './Logo';
 interface HeaderProps {
   onOpenCart: () => void;
   onOpenReturn: () => void;
+  onOpenProfile: () => void;
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
 }
 
-export default function Header({ onOpenCart, onOpenReturn }: HeaderProps) {
+export default function Header({ onOpenCart, onOpenReturn, onOpenProfile, searchQuery, onSearchChange }: HeaderProps) {
   const { totalItems } = useCart();
   const balance = 1250; // Mock BioLoop credit balance
 
@@ -27,6 +30,8 @@ export default function Header({ onOpenCart, onOpenReturn }: HeaderProps) {
             </div>
             <input
               type="text"
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Search sustainable fashion..."
               className="block w-full pl-10 pr-3 py-2 border border-stone-200 rounded-full bg-stone-50 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
             />
@@ -47,7 +52,10 @@ export default function Header({ onOpenCart, onOpenReturn }: HeaderProps) {
               <span className="text-sm font-bold text-emerald-700">฿{balance.toLocaleString()}</span>
             </div>
 
-            <button className="p-2 text-stone-600 hover:bg-stone-100 rounded-full transition-colors relative">
+            <button 
+              onClick={onOpenProfile}
+              className="p-2 text-stone-600 hover:bg-stone-100 rounded-full transition-colors relative"
+            >
               <User className="w-5 h-5" />
             </button>
 
