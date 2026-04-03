@@ -43,9 +43,19 @@ export default function ImpactDashboard() {
 
         <div className="mt-12 p-6 bg-stone-50 rounded-3xl border border-stone-100 flex flex-col md:flex-row items-center gap-6">
           <div className="flex -space-x-4">
-            {[1, 2, 3, 4].map((i) => (
+            {[
+              '1534528741775-53994a69daeb',
+              '1507003211169-0a1dd7228f2d',
+              '1494790108377-be9c29b29330',
+              '1500648767791-00dcc994a43e'
+            ].map((id, i) => (
               <div key={i} className="w-12 h-12 rounded-full border-4 border-white overflow-hidden bg-stone-200">
-                <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="User" referrerPolicy="no-referrer" />
+                <img 
+                  src={`https://images.unsplash.com/photo-${id}?q=80&w=100&auto=format&fit=crop`} 
+                  alt="User" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer" 
+                />
               </div>
             ))}
             <div className="w-12 h-12 rounded-full border-4 border-white bg-emerald-600 flex items-center justify-center text-white text-xs font-bold">
